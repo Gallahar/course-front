@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Axios } from 'api/axios'
+import { axios } from 'api/axios'
+import Cookies from 'js-cookie'
 
 export const Login = () => {
 	const navigate = useNavigate()
@@ -13,8 +14,9 @@ export const Login = () => {
 		if (!email.trim() || !password.trim())
 			return alert('fields must not be empty')
 		try {
-			const data = await Axios.post('/login', {
-				data: { email, password },
+			const data = await axios.post('auth/login', {
+				email,
+				password,
 			})
 			Cookies.set('token', JSON.stringify(data.data.token))
 			navigate('/sign')
@@ -25,23 +27,23 @@ export const Login = () => {
 
 	return (
 		<section className="section">
-			<form onSubmit={handleSubmit} className="form-container">
-				<h1>Login</h1>
-				<input
-					onChange={(e) => setEmail(e.target.value)}
-					required
-					placeholder="enter your email"
-				/>
-				<input
-					onChange={(e) => setPassword(e.target.value)}
-					required
-					placeholder="enter your password"
-				/>
-				<button type="submit" className="form-btn">
-					Login
-				</button>
-				<Link to="/register"> Need an account?</Link>
-			</form>
+			<div className="container">
+				<form className="container-form" onSubmit={handleSubmit}>
+					<h1>Login</h1>
+					<input
+						onChange={(e) => setEmail(e.target.value)}
+						required
+						placeholder="enter your email"
+					/>
+					<input
+						onChange={(e) => setPassword(e.target.value)}
+						required
+						placeholder="enter your password"
+					/>
+					<button type="submit">Login</button>
+					<Link to="/register"> Need an account?</Link>
+				</form>
+			</div>
 		</section>
 	)
 }

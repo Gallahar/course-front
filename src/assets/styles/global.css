@@ -40,27 +40,29 @@ button {
 	);
 }
 
-.form-container {
-	max-width: 800px;
+.container {
+	max-width: 1440px;
+	width: 100vw;
 	margin: 0 auto;
 	padding: 2rem;
 	text-align: center;
 }
 
-.section form {
+.container-form {
+	max-width: 50%;
+	margin: 0 auto;
 	background: rgba(255, 255, 255, 0.8);
 	border: 1px solid rgba(87, 160, 201, 0.84);
 	box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 8px;
-	width: 50%;
 	gap: 20px;
 	display: flex;
-	flex-flow: column wrap;
-	justify-content: space-between;
+	flex-direction: column;
 	align-items: center;
+	padding: 2rem;
 }
 
-.section form input {
+.container-form > input {
 	width: 80%;
 	padding: 10px;
 	text-align: center;
@@ -69,11 +71,11 @@ button {
 	font-size: 1.1rem;
 }
 
-.section form h1 {
+.container-form > h1 {
 	font-size: 2rem;
 }
 
-.form-btn {
+.container-form > button {
 	font-weight: 600;
 	font-size: 1.1rem;
 	padding: 10px 30px;
@@ -82,4 +84,83 @@ button {
 	border-radius: 8px;
 	border: 0.5px solid #61b0dc;
 	cursor: pointer;
+}
+
+.admin-section {
+	height: 100vh;
+	background: linear-gradient(
+		233.67deg,
+		rgba(78, 146, 182, 0.13) 14.75%,
+		rgba(129, 167, 189, 0.84) 87.2%
+	);
+}
+
+.admin-container {
+	max-width: 1440px;
+	border-radius: 8px;
+	background-color: rgb(250, 242, 242);
+	margin: 0 auto;
+}
+
+.admin-container-table {
+	background-color: rgb(207, 199, 199);
+	border-radius: 8px;
+	margin: 0 auto;
+	max-width: 1440px;
+	margin-top: 20px;
+}
+
+.admin-header {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	border-radius: 8px;
+	margin: 0;
+	padding: 20px;
+	background-color: #7fb4d3;
+}
+
+.admin-header a {
+	background-color: rgb(207, 199, 199);
+	padding: 10px;
+	font-size: 1.5rem;
+	border-radius: 8px;
+}
+
+.adminCardsContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.adminTableCard {
+	padding: 10px;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: rgb(207, 199, 199);
+}
+
+.adminTableCard-controls {
+	display: flex;
+	gap: 10px;
+}
+
+.adminTableCardButton {
+	padding: 5px;
+	background-color: black;
+	color: white;
+	border-radius: 6px;
+}
+
+.adminPageWrapper {
+	background-color: rgb(240, 236, 232);
+	padding: 10px;
+}
+
+.adminPageHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
