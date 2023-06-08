@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react'
 import { axios } from 'api/axios'
 import { MainContext } from 'providers/MainProvider'
 import { useIdLocation } from 'hooks/useIdLocation'
+import { Link } from 'react-router-dom'
 
 export const UserCourse = () => {
 	const { user } = useContext(MainContext)
@@ -46,9 +47,9 @@ export const UserCourse = () => {
 							style={{ display: 'flex', flexDirection: 'column' }}
 						>
 							{course.tests.map((t) => (
-								<a key={t._id} href={`/tests/${t._id}`}>
+								<Link key={t._id} href={`/tests/${t._id}`}>
 									{t.title}
-								</a>
+								</Link>
 							))}
 						</div>
 						{!isCompleted && (

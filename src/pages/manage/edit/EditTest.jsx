@@ -22,6 +22,7 @@ export const EditTest = () => {
 				console.log(error)
 			} finally {
 				setLoading(false)
+				console.log(addedQuestions)
 			}
 		}
 		getCurrentTest()
@@ -46,19 +47,18 @@ export const EditTest = () => {
 						placeholder="обновить название"
 					/>
 					<div>
-            
 						{addedQuestions.map(({ question, _id, answers }) => (
 							<div key={_id}>
 								<h1>{question}</h1>
 								<ul>
-									{answers.map((answer,id) => (
+									{answers.map((answer, id) => (
 										<p key={id}>{answer}</p>
 									))}
 								</ul>
 							</div>
 						))}
 					</div>
-					<button>обновить</button>
+					<button type='submit'>обновить</button>
 				</form>
 			)}
 		</>
