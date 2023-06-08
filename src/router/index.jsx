@@ -7,7 +7,11 @@ import { ProtectedUserRoute } from './ProtectedUserRoute'
 import { ProtectedAdminRoute } from './ProtectedAdminRoute'
 import { Courses } from 'pages/manage/read/courses'
 import { Tests } from 'pages/manage/read/Tests'
+import { UserTest } from 'pages/UserTest'
 import { Course } from 'pages/manage/read/Course'
+import { EditCourse } from 'pages/manage/edit/EditCourse'
+import { UserCourse } from 'pages/UserCourse'
+import { EditTest } from 'pages/manage/edit/EditTest'
 
 export const router = createBrowserRouter([
 	{ element: <Login />, path: '/login' },
@@ -23,12 +27,22 @@ export const router = createBrowserRouter([
 			{
 				element: <Courses />,
 				path: 'courses',
-				children: [{ element: <Course />, path: ':id' }],
 			},
+			{ element: <Course />, path: 'courses/:id' },
+			{ element: <EditCourse />, path: 'courses/edit/:id' },
 			{
 				element: <Tests />,
 				path: 'tests',
 			},
+			{ element: <EditTest />, path: 'tests/edit/:id' },
+		],
+	},
+	{
+		element: <MainLayout />,
+		path: '/',
+		children: [
+			{ element: <UserTest />, path: 'tests/:id' },
+			{ element: <UserCourse />, path: 'courses/:id' },
 		],
 	},
 ])

@@ -7,7 +7,7 @@ export const AdminTableCard = ({ item, handleDelete }) => {
 		<div className="adminTableCard">
 			<h1>{title}</h1>
 			<div className="adminTableCard-controls">
-				<Link>
+				<Link to={`edit/${_id}`}>
 					<button className="adminTableCardButton">
 						редактировать
 					</button>
@@ -16,7 +16,7 @@ export const AdminTableCard = ({ item, handleDelete }) => {
 					<button className="adminTableCardButton">статистика</button>
 				</Link>
 				<button
-					onClick={handleDelete(_id)}
+					onClick={() => handleDelete(_id)}
 					className="adminTableCardButton"
 				>
 					удалить

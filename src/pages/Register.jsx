@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { axios } from 'api/axios'
 import Cookies from 'js-cookie'
+import { MainContext } from 'providers/MainProvider'
 
 export const Register = () => {
+	const { setUser } = useContext(MainContext)
 	const navigate = useNavigate()
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -19,9 +21,9 @@ export const Register = () => {
 				password,
 			})
 			Cookies.set('token', JSON.stringify(data.data.token))
+			setUser(data.data.user)
 			navigate('/sign')
 		} catch (error) {
-			console.log(error)
 			alert(error.message)
 		}
 	}

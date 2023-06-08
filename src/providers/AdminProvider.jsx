@@ -11,6 +11,7 @@ const AdminContextInitialValue = {
 export const AdminContext = createContext(AdminContextInitialValue)
 
 export const AdminProvider = ({ children }) => {
+	const [isLoading, setIsLoading] = useState(true)
 	const [courses, setCourses] = useState([])
 	const [tests, setTests] = useState([])
 
@@ -18,35 +19,37 @@ export const AdminProvider = ({ children }) => {
 		const getCourses = async () => {
 			try {
 				const data = await axios.get('/course/find-admin')
-				console.log(data)
 				setCourses(data.data)
 			} catch (error) {
 				alert(error.message)
+			} finally {
+				setIsLoading(false)
 			}
 		}
 
-        const getTests = async () => {
+		const getTests = async () => {
 			try {
 				const data = await axios.get('/test/find-admin')
-				console.log(data)
 				setTests(data.data)
 			} catch (error) {
 				alert(error.message)
+			} finally {
+				setIsLoading(false)
 			}
 		}
 
-
-
 		getCourses()
-        getTests()
+		getTests()
 	}, [])
-
 
 	return (
 		<AdminContext.Provider
 			value={{
 				courses,
 				tests,
+				setCourses,
+				setTests,
+				isLoading,
 			}}
 		>
 			{children}
