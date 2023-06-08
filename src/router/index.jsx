@@ -8,7 +8,6 @@ import { ProtectedAdminRoute } from './ProtectedAdminRoute'
 import { Courses } from 'pages/manage/read/courses'
 import { Tests } from 'pages/manage/read/Tests'
 import { Course } from 'pages/manage/read/Course'
-import { AdminProvider } from 'providers/AdminProvider'
 
 export const router = createBrowserRouter([
 	{ element: <Login />, path: '/login' },
@@ -16,9 +15,7 @@ export const router = createBrowserRouter([
 	{
 		element: (
 			<ProtectedAdminRoute>
-				<AdminProvider>
-					<AdminLayout />
-				</AdminProvider>
+				<AdminLayout />
 			</ProtectedAdminRoute>
 		),
 		path: '/manage',
