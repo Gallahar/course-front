@@ -27,6 +27,7 @@ img {
 button {
 	border: none;
 	background-color: transparent;
+	cursor: pointer;
 }
 
 .section {
@@ -250,4 +251,85 @@ button {
 
 .userInfo {
 	text-align: center;
+}
+
+.testContainer {
+	width: fit-content;
+
+	display: flex;
+	flex-direction: column;
+	align-items: left;
+}
+
+.testTitle {
+	width: fit-content;
+	font-size: 30px;
+}
+
+.testQuestion {
+	font-size: 20px;
+	text-align: left;
+	font-weight: 600;
+}
+
+.testButton {
+	width: fit-content;
+	background: #242424;
+	color: #fff;
+	padding: 7px 12px;
+	border-radius: 7px;
+	font-size: 15px;
+}
+
+.testAnswersWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.mainTitle {
+	font-size: 22px;
+	margin: 0;
+}
+
+.mainModelsWrapper {
+	display: flex;
+}
+
+@media (max-width: 768px) {
+	.mainModelsWrapper {
+		flex-direction: column;
+	}
+}
+
+.mainCanvas {
+	height: 400px;
+}
+
+.editTestInput {
+	height: 30px;
+}
+
+.editTestInputTitle {
+	height: 30px;
+	margin: 0;
+	margin-top: 6px;
+}
+
+.courseText {
+	width: 80%;
+	margin: 0 auto;
+	text-align: left;
+}
+
+.courseTestsTitle {
+	margin-top: 45px;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.courseTestLink {
+	margin-top: 0;
+	color: #1459b3;
+	font-size: 17px;
 }
