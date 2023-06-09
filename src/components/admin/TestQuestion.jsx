@@ -54,8 +54,9 @@ export const TestQuestion = ({
 			}}
 		>
 			<div style={{ display: 'flex', gap: '10px' }}>
-				<p>Вопрос</p>
+				<p className='editTestInputTitle'>Вопрос</p>
 				<input
+					className='editTestInput'
 					value={question}
 					onChange={(e) => setQuestion(e.target.value)}
 				/>
@@ -70,9 +71,10 @@ export const TestQuestion = ({
 					deleteAnswerHandler={() => deleteAnswerHandler(i)}
 				/>
 			))}
-			<div style={{ display: 'flex', gap: '10px' }}>
-				<p>Правильный ответ</p>
+			<div style={{ display: 'flex', gap: '10px', margin: '5px 0' }}>
+				<p className='editTestInputTitle'>Правильный ответ</p>
 				<input
+					className='editTestInput'
 					value={correctAnswer}
 					onChange={(e) => setCorrectAnswer(e.target.value)}
 				/>
@@ -87,12 +89,7 @@ export const TestQuestion = ({
 			>
 				<button
 					onClick={() =>
-						saveQuestionHandler(
-							answers,
-							correctAnswer,
-							question,
-							index
-						)
+						saveQuestionHandler(answers, correctAnswer, question, index)
 					}
 				>
 					Сохранить

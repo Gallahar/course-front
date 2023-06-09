@@ -49,45 +49,46 @@ export const UserTest = () => {
 				<h1>Загружаю...</h1>
 			) : (
 				<section>
-					<div className="container">
-						<p>{test.title}</p>
-						{action === 'preview' && (
-							<button onClick={() => setAction('process')}>
-								Начать
-							</button>
-						)}
-						{action === 'process' && (
-							<div>
-								<p>
-									Вопрос {questionNumber + 1}.{' '}
-									{test.questions[questionNumber].question}
-								</p>
+					<div className='container'>
+						<div className='testContainer'>
+							<p className='testTitle'>Тест "{test.title}"</p>
+							{action === 'preview' && (
+								<button
+									className='testButton'
+									onClick={() => setAction('process')}
+								>
+									Начать
+								</button>
+							)}
+							{action === 'process' && (
 								<div>
-									{test.questions[questionNumber].answers.map(
-										(a) => {
+									<p className='testQuestion'>
+										Вопрос {questionNumber + 1}.{' '}
+										{test.questions[questionNumber].question}
+									</p>
+									<div className='testAnswersWrapper'>
+										{test.questions[questionNumber].answers.map((a, i) => {
 											return (
 												<button
+													className='testButton'
 													key={a}
-													onClick={() =>
-														answerHandler(a)
-													}
+													onClick={() => answerHandler(a)}
 												>
-													{a}
+													{i + 1}) {a}
 												</button>
 											)
-										}
-									)}
+										})}
+									</div>
 								</div>
-							</div>
-						)}
-						{action === 'finish' && (
-							<div>
-								<p>
-									Результат:{' '}
-									{`${correctAnswers} / ${test.questions.length}`}
-								</p>
-							</div>
-						)}
+							)}
+							{action === 'finish' && (
+								<div>
+									<p className='testTitle'>
+										Результат: {`${correctAnswers} / ${test.questions.length}`}
+									</p>
+								</div>
+							)}
+						</div>
 					</div>
 				</section>
 			)}

@@ -17,10 +17,14 @@ export const TestAnswer = ({
 			}}
 		>
 			<div style={{ display: 'flex', gap: '10px' }}>
-				<p>Ответ</p>
-				<input value={answer} onChange={(e) => setAnswer(e.target.value)} />
+				<p className='editTestInputTitle'>Ответ</p>
+				<input
+					className='editTestInput'
+					value={answer}
+					onChange={(e) => setAnswer(e.target.value)}
+				/>
 			</div>
-			<button onClick={() => saveAnswerHandler(answer, index)}>
+			<button className='' onClick={() => saveAnswerHandler(answer, index)}>
 				Сохранить
 			</button>
 			<button onClick={deleteAnswerHandler}>Удалить</button>

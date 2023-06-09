@@ -38,24 +38,24 @@ export const UserCourse = () => {
 			{isLoading ? (
 				<h1>Загружаю...</h1>
 			) : (
-				<section className="section">
-					<div className="container">
-						<h2>{course.title}</h2>
-						<p>{course.text}</p>
-						<p>Тесты по данному курсу</p>
-						<div
-							style={{ display: 'flex', flexDirection: 'column' }}
-						>
-							{course.tests.map((t) => (
-								<Link key={t._id} to={`/tests/${t._id}`}>
-									{t.title}
+				<section>
+					<div className='container'>
+						<h2>Курс "{course.title}"</h2>
+						<p className='courseText'>{course.text}</p>
+						<p className='courseTestsTitle'>Тесты по данному курсу</p>
+						<div style={{ display: 'flex', flexDirection: 'column' }}>
+							{course.tests.map((t, i) => (
+								<Link
+									className='courseTestLink'
+									key={t._id}
+									to={`/tests/${t._id}`}
+								>
+									{i + 1}) {t.title}
 								</Link>
 							))}
 						</div>
 						{!isCompleted && (
-							<button onClick={completeHandler}>
-								Я прошел курс
-							</button>
+							<button onClick={completeHandler}>Я прошел курс</button>
 						)}
 					</div>
 				</section>
