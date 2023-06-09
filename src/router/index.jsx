@@ -8,7 +8,8 @@ import { ProtectedAdminRoute } from './ProtectedAdminRoute'
 import { Courses } from 'pages/manage/read/courses'
 import { Tests } from 'pages/manage/read/Tests'
 import { UserTest } from 'pages/UserTest'
-import { Course } from 'pages/manage/read/Course'
+import { CourseStatistics } from 'pages/manage/read/CourseStatistics'
+import { TestStatistics } from 'pages/manage/read/TestStatistics'
 import { EditCourse } from 'pages/manage/edit/EditCourse'
 import { UserCourse } from 'pages/UserCourse'
 import { EditTest } from 'pages/manage/edit/EditTest'
@@ -28,17 +29,22 @@ export const router = createBrowserRouter([
 				element: <Courses />,
 				path: 'courses',
 			},
-			{ element: <Course />, path: 'courses/:id' },
+			{ element: <CourseStatistics />, path: 'courses/:id' },
 			{ element: <EditCourse />, path: 'courses/edit/:id' },
 			{
 				element: <Tests />,
 				path: 'tests',
 			},
+			{ element: <TestStatistics />, path: 'tests/:id' },
 			{ element: <EditTest />, path: 'tests/edit/:id' },
 		],
 	},
 	{
-		element: <MainLayout />,
+		element: (
+			<ProtectedUserRoute>
+				<MainLayout />
+			</ProtectedUserRoute>
+		),
 		path: '/',
 		children: [
 			{ element: <UserTest />, path: 'tests/:id' },

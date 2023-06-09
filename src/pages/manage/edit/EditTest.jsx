@@ -3,7 +3,7 @@ import { useIdLocation } from 'hooks/useIdLocation'
 import { AdminContext } from 'providers/AdminProvider'
 import { useContext, useEffect } from 'react'
 import { useState } from 'react'
-import { TestQuestion } from 'components/TestQuestion'
+import { TestQuestion } from 'components/admin/TestQuestion'
 
 export const EditTest = () => {
 	const [loading, setLoading] = useState(true)
@@ -37,7 +37,9 @@ export const EditTest = () => {
 			if (answers.length < 2) return alert('Введите минимум 2 ответа')
 			if (!question) return alert('Введите название вопроса')
 			if (!answers.includes(correctAnswer))
-				return alert('Правильный ответ должен совпадать с одним из ответов')
+				return alert(
+					'Правильный ответ должен совпадать с одним из ответов'
+				)
 			for (let i = 0; i < answers.length; i++) {
 				if (!answers[i]) return alert('Ответ не может быть пустым')
 			}
@@ -99,22 +101,26 @@ export const EditTest = () => {
 			{loading ? (
 				<h1>Загружаю...</h1>
 			) : (
-				<div className='container-form'>
+				<div className="container-form">
 					{currentTest?.title ? (
 						<h1>{`Обновить тест: "${currentTest.title}"`}</h1>
 					) : null}
 					<input
 						value={title}
 						onChange={(e) => setTitle(e.target.value)}
-						placeholder='обновить название'
+						placeholder="обновить название"
 					/>
-					<button onClick={addQuestionHandler}>Добавить вопрос</button>
+					<button onClick={addQuestionHandler}>
+						Добавить вопрос
+					</button>
 					<div>
 						{questions.map((question, i) => (
 							<TestQuestion
 								q={question}
 								key={question.question + i}
-								deleteQuestionHandler={() => deleteQuestionHandler(i)}
+								deleteQuestionHandler={() =>
+									deleteQuestionHandler(i)
+								}
 								index={i}
 								saveQuestionHandler={saveQuestionHandler}
 							/>

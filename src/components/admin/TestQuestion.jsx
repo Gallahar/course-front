@@ -32,7 +32,7 @@ export const TestQuestion = ({
 			}
 		}
 		setAnswers(updatedAnswers)
-        alert('Ответ сохранен!')
+		alert('Ответ сохранен!')
 	}
 
 	const deleteAnswerHandler = (index) => {
@@ -55,13 +55,16 @@ export const TestQuestion = ({
 		>
 			<div style={{ display: 'flex', gap: '10px' }}>
 				<p>Вопрос</p>
-				<input value={question} onChange={(e) => setQuestion(e.target.value)} />
+				<input
+					value={question}
+					onChange={(e) => setQuestion(e.target.value)}
+				/>
 			</div>
 			<button onClick={addAnswer}>Добавить ответ</button>
 			{answers.map((a, i) => (
 				<TestAnswer
 					key={a + i}
-                    index={i}
+					index={i}
 					answerData={a}
 					saveAnswerHandler={saveAnswerHandler}
 					deleteAnswerHandler={() => deleteAnswerHandler(i)}
@@ -84,7 +87,12 @@ export const TestQuestion = ({
 			>
 				<button
 					onClick={() =>
-						saveQuestionHandler(answers, correctAnswer, question, index)
+						saveQuestionHandler(
+							answers,
+							correctAnswer,
+							question,
+							index
+						)
 					}
 				>
 					Сохранить

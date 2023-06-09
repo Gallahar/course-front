@@ -1,9 +1,10 @@
 import { Outlet } from 'react-router-dom'
+import { UserHeader } from 'components/user/UserHeader'
 
 export const MainLayout = () => {
 	return (
 		<section className="admin-section">
-			<header> МЕСТО ДЛЯ ХЕДЕРА</header>
+			<UserHeader />
 			<Outlet />
 		</section>
 	)

@@ -14,7 +14,7 @@ export const ProtectedUserRoute = ({ children }) => {
 
 	if (isLoading) {
 		return <h1>Загружаю...</h1>
-	} else {
-		return <div>{children}</div>
 	}
+
+	return <div>{children}</div>
 }

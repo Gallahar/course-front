@@ -2,7 +2,7 @@ import { axios } from 'api/axios'
 import { useIdLocation } from 'hooks/useIdLocation'
 import { useEffect, useState } from 'react'
 
-export const Course = () => {
+export const CourseStatistics = () => {
 	const [course, setCourse] = useState({})
 	const [isLoading, setIsLoading] = useState(true)
 	const id = useIdLocation()
@@ -13,7 +13,9 @@ export const Course = () => {
 				const data = await axios.get(`/course/statistics/${id}`)
 				setCourse(data.data)
 				setIsLoading(false)
-			} catch (error) {}
+			} catch (error) {
+				console.log(error)
+			}
 		}
 
 		getCourseById()

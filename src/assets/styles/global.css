@@ -152,6 +152,7 @@ button {
 	background-color: black;
 	color: white;
 	border-radius: 6px;
+	cursor: pointer;
 }
 
 .adminPageWrapper {
@@ -198,4 +199,55 @@ button {
 	flex-direction: column;
 	list-style: disc;
 	gap: 10px;
+}
+
+.testCard {
+	margin: 0 auto;
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 8px;
+	word-break: break-all;
+	padding: 20px;
+}
+
+.resultWrapper {
+	width: 100%;
+	max-width: 800px;
+	padding: 20px;
+	border-radius: 8px;
+	border: #535353 1px solid;
+}
+
+.resultCard {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.userHeader {
+	border-radius: 8px;
+	padding: 20px;
+	background: linear-gradient(
+		233.67deg,
+		rgba(98, 126, 139, 0.13) 14.75%,
+		rgba(58, 144, 201, 0.84) 87.2%
+	);
+	max-width: 1440px;
+	margin: 0 auto;
+}
+
+.userNavbar {
+	display: flex;
+	justify-content: space-around;
+}
+.userLink {
+	padding: 10px;
+	background-color: #fff;
+	border-radius: 8px;
+}
+
+.userInfo {
+	text-align: center;
 }

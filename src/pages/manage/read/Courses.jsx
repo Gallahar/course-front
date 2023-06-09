@@ -1,4 +1,4 @@
-import { AdminTableCard } from 'components/AdminTableCard'
+import { AdminTableCard } from 'components/admin/AdminTableCard'
 import { AdminContext } from 'providers/AdminProvider'
 import { useContext } from 'react'
 import { axios } from 'api/axios.js'
@@ -22,7 +22,6 @@ export const Courses = () => {
 			alert(error.message)
 		}
 	}
-
 
 	return (
 		<div className="adminPageWrapper">

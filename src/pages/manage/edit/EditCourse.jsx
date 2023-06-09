@@ -43,7 +43,7 @@ export const EditCourse = () => {
 		if (!text.trim() || !title.trim()) return
 		try {
 			const dto = {
-				_id: id,
+				_id: courseId,
 				dto: {
 					title,
 					text,
@@ -52,7 +52,9 @@ export const EditCourse = () => {
 			}
 			axios.post('course/update', { ...dto })
 			setCurrentCourse((prev) => ({ ...prev, title, text }))
-			setCourses((prev) => prev.filter((course) => course._id !== id))
+			setCourses((prev) =>
+				prev.filter((course) => course._id !== courseId)
+			)
 			setCourses((prev) => [...prev, currentCourse])
 			alert('Курс успешно обновлен')
 		} catch (error) {

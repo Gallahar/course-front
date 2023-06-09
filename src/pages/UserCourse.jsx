@@ -8,7 +8,7 @@ export const UserCourse = () => {
 	const { user } = useContext(MainContext)
 	const [isCompleted, setIsCompleted] = useState(false)
 	const courseId = useIdLocation()
-	const [loading, setIsLoading] = useState(true)
+	const [isLoading, setIsLoading] = useState(true)
 	const [course, setCourse] = useState({})
 	useEffect(() => {
 		const getCourseById = async () => {
@@ -35,7 +35,7 @@ export const UserCourse = () => {
 
 	return (
 		<>
-			{loading ? (
+			{isLoading ? (
 				<h1>Загружаю...</h1>
 			) : (
 				<section className="section">
@@ -47,7 +47,7 @@ export const UserCourse = () => {
 							style={{ display: 'flex', flexDirection: 'column' }}
 						>
 							{course.tests.map((t) => (
-								<Link key={t._id} href={`/tests/${t._id}`}>
+								<Link key={t._id} to={`/tests/${t._id}`}>
 									{t.title}
 								</Link>
 							))}
