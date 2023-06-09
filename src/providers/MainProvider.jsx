@@ -10,6 +10,8 @@ export const MainContext = createContext(MainContextInitialValue)
 
 export const MainProvider = ({ children }) => {
 	const [user, setUser] = useState(null)
+	const [courses, setCourses] = useState([])
+	const [tests, setTests] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
@@ -27,12 +29,36 @@ export const MainProvider = ({ children }) => {
 		refreshUser()
 	}, [])
 
+	useEffect(() => {
+		const getCourses = async () => {
+			try {
+				const data = await axios.get('course/find')
+				setCourses(data.data)
+			} catch (error) {
+				console.log(error)
+			}
+		}
+
+		const getTests = async () => {
+			try {
+				const data = await axios.get('test/find')
+				setTests(data.data)
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		getCourses()
+		getTests()
+	}, [])
+
 	return (
 		<MainContext.Provider
 			value={{
 				user,
 				setUser,
 				isLoading,
+				courses,
+				tests,
 			}}
 		>
 			{children}

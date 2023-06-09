@@ -8,11 +8,8 @@ export const UserHeader = () => {
 	return (
 		<header className="userHeader">
 			<nav className="userNavbar">
-				<Link className="userLink" to="courses">
-					Курсы
-				</Link>
-				<Link className="userLink" to="tests">
-					Тесты
+				<Link className="userLink" to="/">
+					Главная
 				</Link>
 			</nav>
 			<h1 className="userInfo">{user.email}</h1>

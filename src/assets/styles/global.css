@@ -343,3 +343,41 @@ button {
 	color: #1459b3;
 	font-size: 17px;
 }
+
+.coursesWrapper {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.coursesWrapper > a {
+	padding: 10px;
+	font-size: 1.8rem;
+	color: rgb(14, 61, 165);
+	text-decoration: underline;
+	border-radius: 8px;
+	margin-top: 6px;
+}
+
+.testsWrapper {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.testsWrapper > a {
+	padding: 10px;
+	font-size: 1.8rem;
+	color: rgb(14, 61, 165);
+	text-decoration: underline;
+	border-radius: 8px;
+	margin-top: 6px;
+}
+
+.coursesWrapper > h1 {
+	font-size: 1.5rem;
+}
+
+.testsWrapper > h1 {
+	font-size: 1.5rem;
+}

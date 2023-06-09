@@ -13,6 +13,7 @@ import { TestStatistics } from 'pages/manage/read/TestStatistics'
 import { EditCourse } from 'pages/manage/edit/EditCourse'
 import { UserCourse } from 'pages/UserCourse'
 import { EditTest } from 'pages/manage/edit/EditTest'
+import { Main } from 'pages/Main'
 
 export const router = createBrowserRouter([
 	{ element: <Login />, path: '/login' },
@@ -45,11 +46,10 @@ export const router = createBrowserRouter([
 				<MainLayout />
 			</ProtectedUserRoute>
 		),
-		path: '/',
 		children: [
+			{ element: <Main />, path: '/' },
 			{ element: <UserTest />, path: 'tests/:id' },
 			{ element: <UserCourse />, path: 'courses/:id' },
 		],
 	},
 ])
-
