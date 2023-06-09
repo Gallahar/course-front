@@ -22,7 +22,7 @@ export const Login = () => {
 			})
 			Cookies.set('token', JSON.stringify(data.data.token))
 			setUser(data.data.user)
-			navigate('/manage')
+			navigate('/')
 		} catch (error) {
 			alert(error.message)
 		}

@@ -22,7 +22,7 @@ export const Register = () => {
 			})
 			Cookies.set('token', JSON.stringify(data.data.token))
 			setUser(data.data.user)
-			navigate('/sign')
+			navigate('/')
 		} catch (error) {
 			alert(error.message)
 		}
