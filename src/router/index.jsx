@@ -53,16 +53,3 @@ export const router = createBrowserRouter([
 	},
 ])
 
-// {
-// 		element: (
-// 			<ProtectedUserRoute>
-// 				<MainLayout />
-// 			</ProtectedUserRoute>
-// 		),
-// 		path: '/',
-// 		children: [
-// 			{ path: 'test/:id', element: <Chats /> },
-// 			{ path: 'course/:id', element: <ChatPage /> },
-// 			{ path: 'profile/:id', element: <ProfilePage /> },
-// 		],
-// 	},

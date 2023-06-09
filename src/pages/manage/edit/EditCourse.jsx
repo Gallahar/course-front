@@ -40,7 +40,8 @@ export const EditCourse = () => {
 
 	const handleUpdate = async (e) => {
 		e.preventDefault()
-		if (!text.trim() || !title.trim()) return
+		if (!text.trim() || !title.trim())
+			return alert('Поля не могут быть пустыми')
 		try {
 			const dto = {
 				_id: courseId,
@@ -50,7 +51,7 @@ export const EditCourse = () => {
 					tests: addedTests,
 				},
 			}
-			axios.post('course/update', { ...dto })
+			await axios.post('course/update', { ...dto })
 			setCurrentCourse((prev) => ({ ...prev, title, text }))
 			setCourses((prev) =>
 				prev.filter((course) => course._id !== courseId)
@@ -75,7 +76,7 @@ export const EditCourse = () => {
 						onChange={(e) => setTitle(e.target.value)}
 						placeholder="обновить название"
 					/>
-					<input
+					<textarea
 						onChange={(e) => setText(e.target.value)}
 						placeholder="обновить содержание"
 					/>
@@ -93,9 +94,6 @@ export const EditCourse = () => {
 											type="checkbox"
 											defaultChecked={addedTests?.some(
 												(t) => {
-													console.log(
-														t._id === test._id
-													)
 													return t._id === test._id
 												}
 											)}
