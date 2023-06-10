@@ -5,14 +5,14 @@ import { Login } from 'pages/Login'
 import { Register } from 'pages/Register'
 import { ProtectedUserRoute } from './ProtectedUserRoute'
 import { ProtectedAdminRoute } from './ProtectedAdminRoute'
-import { Courses } from 'pages/Courses'
-import { Tests } from 'pages/Tests'
+import { Courses } from 'pages/manage/read/Courses'
+import { Tests } from 'pages/manage/read/Tests'
 import { UserTest } from 'pages/UserTest'
-import { CourseStatistics } from 'pages/CourseStatistics'
-import { TestStatistics } from 'pages/TestStatistics'
-import { EditCourse } from 'pages/EditCourse'
+import { CourseStatistics } from 'pages/manage/read/CourseStatistics'
+import { TestStatistics } from 'pages/manage/read/TestStatistics'
+import { EditCourse } from 'pages/manage/edit/EditCourse'
 import { UserCourse } from 'pages/UserCourse'
-import { EditTest } from 'pages/EditTest'
+import { EditTest } from 'pages/manage/edit/EditTest'
 import { Main } from 'pages/Main'
 import { UserTests } from 'pages/UserTests'
 import { UserCourses } from 'pages/UserCourses'
@@ -27,19 +27,20 @@ export const router = createBrowserRouter([
 				<AdminLayout />
 			</ProtectedAdminRoute>
 		),
+		path: '/manage',
 		children: [
 			{
 				element: <Courses />,
-				path: 'manage/courses',
+				path: 'courses',
 			},
-			{ element: <CourseStatistics />, path: 'manage/courses/:id' },
-			{ element: <EditCourse />, path: 'manage/courses/edit/:id' },
+			{ element: <CourseStatistics />, path: 'courses/:id' },
+			{ element: <EditCourse />, path: 'courses/edit/:id' },
 			{
 				element: <Tests />,
 				path: 'tests',
 			},
-			{ element: <TestStatistics />, path: 'manage/tests/:id' },
-			{ element: <EditTest />, path: 'manage/tests/edit/:id' },
+			{ element: <TestStatistics />, path: 'tests/:id' },
+			{ element: <EditTest />, path: 'tests/edit/:id' },
 		],
 	},
 	{
