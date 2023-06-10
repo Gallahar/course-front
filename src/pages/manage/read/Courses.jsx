@@ -10,7 +10,11 @@ export const Courses = () => {
 		try {
 			const data = await axios.post('course/create')
 			setCourses((prev) => [...prev, data.data])
-		} catch (error) {}
+		} catch (error) {
+			if (error.response.status === 400) {
+				alert('Пустой документ уже существует')
+			}
+		}
 	}
 
 	const deleteCourse = async (id) => {
@@ -24,14 +28,19 @@ export const Courses = () => {
 	}
 
 	return (
-		<div className="adminPageWrapper">
-			<div className="adminPageHeader">
-				<h1>Курсы</h1>
-				<button onClick={createCourse} className="adminTableCardButton">
-					Добавить новый
-				</button>
-			</div>
-			<div className="adminCardsContainer">
+		<div className='container'>
+			<h1>Список курсов</h1>
+			<button onClick={createCourse} className='admin_table_button'>
+				Добавить новый
+			</button>
+
+			<div className='table'>
+				<div className='table_head' style={{ justifyContent: 'space-between' }}>
+					<p className='admin_table_title head_item'>Название курса</p>
+					<p className='admin_table_action_title admin_table_title head_item'>
+						Действия
+					</p>
+				</div>
 				{courses?.map((course) => (
 					<AdminTableCard
 						key={course._id}

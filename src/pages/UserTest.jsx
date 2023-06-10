@@ -45,36 +45,38 @@ export const UserTest = () => {
 
 	return (
 		<>
-			{loading ? (
-				<h1>Загружаю...</h1>
-			) : (
+			{loading ? null : (
 				<section>
 					<div className='container'>
-						<div className='testContainer'>
-							<p className='testTitle'>Тест "{test.title}"</p>
+						<div className='test_container'>
+							<p className='test_title'>Тест "{test.title}"</p>
 							{action === 'preview' && (
 								<button
-									className='testButton'
+									className='test_button_start'
 									onClick={() => setAction('process')}
 								>
 									Начать
 								</button>
 							)}
 							{action === 'process' && (
-								<div>
-									<p className='testQuestion'>
-										Вопрос {questionNumber + 1}.{' '}
-										{test.questions[questionNumber].question}
-									</p>
-									<div className='testAnswersWrapper'>
+								<div className='test_questions_wrapper'>
+									<div className='test_question_wrapper'>
+										<p className='test_question'>
+											{test.questions[questionNumber].question}
+										</p>
+										<p className='test_question_number'>
+											Вопрос {questionNumber + 1} / {test.questions.length}{' '}
+										</p>
+									</div>
+									<div className='test_answers_wrapper'>
 										{test.questions[questionNumber].answers.map((a, i) => {
 											return (
 												<button
-													className='testButton'
+													className='test_answer_button'
 													key={a}
 													onClick={() => answerHandler(a)}
 												>
-													{i + 1}) {a}
+													{i + 1}. {a}
 												</button>
 											)
 										})}
@@ -83,9 +85,15 @@ export const UserTest = () => {
 							)}
 							{action === 'finish' && (
 								<div>
-									<p className='testTitle'>
-										Результат: {`${correctAnswers} / ${test.questions.length}`}
+									<p className='test_result'>
+										Ваш результат:{' '}
+										{`${correctAnswers} / ${test.questions.length}`}
 									</p>
+									<Link to='/profile'>
+										<p className='test_note'>
+											* Перейдите в профиль для просмотра всех своих результатов
+										</p>
+									</Link>
 								</div>
 							)}
 						</div>

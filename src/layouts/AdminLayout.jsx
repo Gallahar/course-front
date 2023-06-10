@@ -5,9 +5,9 @@ import { AdminProvider } from 'providers/AdminProvider'
 export const AdminLayout = () => {
 	return (
 		<AdminProvider>
-			<section className="admin-section">
+			<section className='admin-section'>
 				<AdminHeader />
-				<div className="admin-container-table">
+				<div className='user_section'>
 					<Outlet />
 				</div>
 			</section>

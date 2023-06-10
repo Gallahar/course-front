@@ -14,6 +14,9 @@ import { EditCourse } from 'pages/manage/edit/EditCourse'
 import { UserCourse } from 'pages/UserCourse'
 import { EditTest } from 'pages/manage/edit/EditTest'
 import { Main } from 'pages/Main'
+import { UserTests } from 'pages/UserTests'
+import { UserCourses } from 'pages/UserCourses'
+import { Profile } from 'pages/Profile'
 
 export const router = createBrowserRouter([
 	{ element: <Login />, path: '/login' },
@@ -48,8 +51,11 @@ export const router = createBrowserRouter([
 		),
 		children: [
 			{ element: <Main />, path: '/' },
+			{ element: <Profile />, path: 'profile' },
 			{ element: <UserTest />, path: 'tests/:id' },
+			{ element: <UserTests />, path: 'tests' },
 			{ element: <UserCourse />, path: 'courses/:id' },
+			{ element: <UserCourses />, path: 'courses' },
 		],
 	},
 ])

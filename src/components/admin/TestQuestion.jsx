@@ -46,22 +46,22 @@ export const TestQuestion = ({
 	}
 
 	return (
-		<div
-			style={{
-				border: '3px solid gray',
-				padding: '10px',
-				marginBottom: '15px',
-			}}
-		>
-			<div style={{ display: 'flex', gap: '10px' }}>
-				<p className='editTestInputTitle'>Вопрос</p>
+		<div className='admin_form_wrapper'>
+			<div className='admin_test_wrapper'>
+				<p className='admin_course_title'>Вопрос</p>
 				<input
-					className='editTestInput'
-					value={question}
+					className='admin_input'
 					onChange={(e) => setQuestion(e.target.value)}
+					value={question}
 				/>
 			</div>
-			<button onClick={addAnswer}>Добавить ответ</button>
+			<button
+				style={{ marginTop: '10px' }}
+				className='admin_table_button'
+				onClick={addAnswer}
+			>
+				Добавить ответ
+			</button>
 			{answers.map((a, i) => (
 				<TestAnswer
 					key={a + i}
@@ -71,30 +71,27 @@ export const TestQuestion = ({
 					deleteAnswerHandler={() => deleteAnswerHandler(i)}
 				/>
 			))}
-			<div style={{ display: 'flex', gap: '10px', margin: '5px 0' }}>
-				<p className='editTestInputTitle'>Правильный ответ</p>
+			<div style={{ marginTop: '20px' }}>
+				<p className='admin_course_title'>Правильный ответ</p>
 				<input
-					className='editTestInput'
-					value={correctAnswer}
+					className='admin_input'
 					onChange={(e) => setCorrectAnswer(e.target.value)}
+					value={correctAnswer}
 				/>
 			</div>
-			<div
-				style={{
-					display: 'flex',
-					gap: '10px',
-					border: '3px solid gray',
-					padding: '10px',
-				}}
-			>
+			<div style={{ marginTop: '20px' }}>
 				<button
+					className='admin_table_button'
+					style={{ marginRight: '10px' }}
 					onClick={() =>
 						saveQuestionHandler(answers, correctAnswer, question, index)
 					}
 				>
-					Сохранить
+					Сохранить вопрос
 				</button>
-				<button onClick={deleteQuestionHandler}>Удалить</button>
+				<button className='admin_table_button' onClick={deleteQuestionHandler}>
+					Удалить вопрос
+				</button>
 			</div>
 		</div>
 	)

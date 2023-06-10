@@ -13,7 +13,7 @@ export const ProtectedUserRoute = ({ children }) => {
 	}, [user, isLoading])
 
 	if (isLoading) {
-		return <h1>Загружаю...</h1>
+		return <></>
 	}
 
 	return <div>{children}</div>

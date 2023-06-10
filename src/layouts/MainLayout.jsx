@@ -3,9 +3,11 @@ import { UserHeader } from 'components/user/UserHeader'
 
 export const MainLayout = () => {
 	return (
-		<section className="admin-section">
+		<div>
 			<UserHeader />
-			<Outlet />
-		</section>
+			<section className='user_section'>
+				<Outlet />
+			</section>
+		</div>
 	)
 }

@@ -35,24 +35,29 @@ export const UserCourse = () => {
 
 	return (
 		<>
-			{isLoading ? (
-				<h1>Загружаю...</h1>
-			) : (
+			{isLoading ? null : (
 				<section>
 					<div className='container'>
-						<h2>Курс "{course.title}"</h2>
-						<p className='courseText'>{course.text}</p>
-						<p className='courseTestsTitle'>Тесты по данному курсу</p>
-						<div style={{ display: 'flex', flexDirection: 'column' }}>
-							{course.tests.map((t, i) => (
-								<Link
-									className='courseTestLink'
-									key={t._id}
-									to={`/tests/${t._id}`}
-								>
-									{i + 1}) {t.title}
-								</Link>
-							))}
+						<div className='course_wrapper'>
+							<p className='course_title'>Курс "{course.title}"</p>
+							<p className='course_text'>{course.text}</p>
+						</div>
+						<p className='course_tests_title'>Тесты по данному курсу</p>
+						<div className='table'>
+							<div className='table_head'>
+								<p className='table_number head_item'>#</p>
+								<p className='table_title head_item'>Название теста</p>
+							</div>
+							{course.tests.map(({ title, _id }, i) => {
+								return (
+									<div key={title} className='table_item'>
+										<p className='table_number'>{i + 1}.</p>
+										<Link to={`/tests/${_id}`} className='table_title'>
+											{title}
+										</Link>
+									</div>
+								)
+							})}
 						</div>
 						{!isCompleted && (
 							<button onClick={completeHandler}>Я прошел курс</button>

@@ -1,14 +1,7 @@
 import { Canvas } from '@react-three/fiber'
 import { Environment, OrbitControls, useFBX } from '@react-three/drei'
-import { Suspense, useContext, useEffect } from 'react'
+import { Suspense, useContext } from 'react'
 import { MainContext } from 'providers/MainProvider'
-import { Link } from 'react-router-dom'
-
-const Metano = () => {
-	const Metano = useFBX('../../3d-models/metano.fbx')
-
-	return <primitive object={Metano} scale={12} />
-}
 
 const Etilen = () => {
 	const Etilen = useFBX('../../3d-models/Etilen.fbx')
@@ -23,45 +16,42 @@ const Etan = () => {
 }
 
 export const Main = () => {
-	const { courses, tests } = useContext(MainContext)
-
 	return (
 		<section>
-			<div className="container">
-				<p className="mainTitle">Модели атомов</p>
-				<div className="mainModelsWrapper">
-					<Canvas className="mainCanvas">
-						<Suspense fallback={null}>
-							<Etilen />
-							<OrbitControls />
-						</Suspense>
-					</Canvas>
-					<Canvas className="mainCanvas">
-						<Suspense fallback={null}>
-							<Metano />
-							<OrbitControls />
-						</Suspense>
-					</Canvas>
-					<Canvas className="mainCanvas">
-						<Suspense fallback={null}>
-							<Etan />
-							<OrbitControls />
-						</Suspense>
-					</Canvas>
+			<div className='container'>
+				<h1>Courses.ru - лучшая образовательная платформа для студентов!</h1>
+				<div className='main_info'>
+					<p className='main_heading'>На нашем ресурсе вы найдете</p>
+					<div className='main_list'>
+						<p className='main_list_item'>- более 1000 курсов</p>
+						<p className='main_list_item'>- более 500 тестов</p>
+						<p className='main_list_item'>- удобную систему оценивания</p>
+						<p className='main_list_item'>- круглосуточную поддержку</p>
+					</div>
 				</div>
-				<div className="coursesWrapper">
-					<h1>Курсы:</h1>
-					{courses.map((course) => (
-						<Link to={`/courses/${course._id}`}>
-							{course.title}
-						</Link>
-					))}
-				</div>
-				<div className="testsWrapper">
-					<h1>Тесты:</h1>
-					{tests.map((test) => (
-						<Link to={`/tests/${test._id}`}>{test.title}</Link>
-					))}
+				<div className='models_wrapper'>
+					<div className='model_wrapper'>
+						<p className='model_name'>Этилен - C2H4</p>
+						<div>
+							<Canvas className='main_canvas'>
+								<Suspense fallback={null}>
+									<Etilen />
+									<OrbitControls />
+								</Suspense>
+							</Canvas>
+						</div>
+					</div>
+					<div className='model_wrapper'>
+						<p className='model_name'>Этан - C2H6</p>
+						<div>
+							<Canvas className='main_canvas'>
+								<Suspense fallback={null}>
+									<Etan />
+									<OrbitControls />
+								</Suspense>
+							</Canvas>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>

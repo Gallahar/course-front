@@ -9,25 +9,25 @@ export const TestAnswer = ({
 	const [answer, setAnswer] = useState(answerData)
 
 	return (
-		<div
-			style={{
-				border: '1px solid gray',
-				padding: '5px',
-				marginTop: '15px',
-			}}
-		>
-			<div style={{ display: 'flex', gap: '10px' }}>
-				<p className='editTestInputTitle'>Ответ</p>
+		<div className='admin_test_answer_wrapper'>
+			<div>
+				<p className='admin_course_title'>{index + 1}) Ответ</p>
 				<input
-					className='editTestInput'
-					value={answer}
+					className='admin_input'
 					onChange={(e) => setAnswer(e.target.value)}
+					value={answer}
 				/>
 			</div>
-			<button className='' onClick={() => saveAnswerHandler(answer, index)}>
-				Сохранить
+			<button
+				className='admin_table_button'
+				style={{ marginRight: '10px', marginTop: '10px' }}
+				onClick={() => saveAnswerHandler(answer, index)}
+			>
+				Сохранить ответ
 			</button>
-			<button onClick={deleteAnswerHandler}>Удалить</button>
+			<button className='admin_table_button' onClick={deleteAnswerHandler}>
+				Удалить ответ
+			</button>
 		</div>
 	)
 }

@@ -4,24 +4,26 @@ export const AdminTableCard = ({ item, handleDelete }) => {
 	const { _id, title } = item
 
 	return (
-		<div className="adminTableCard">
-			<h1>{title}</h1>
-			<div className="adminTableCard-controls">
-				<Link to={`edit/${_id}`}>
-					<button className="adminTableCardButton">
-						редактировать
+		<>
+			<div className='admin_table_item'>
+				<p className='admin_table_title'>
+					{title ? title : '"Пустой документ"'}
+				</p>
+				<div className='admin_table_card_controls'>
+					<Link to={`edit/${_id}`}>
+						<button className='admin_table_button'>редакт.</button>
+					</Link>
+					<Link to={`${_id}`}>
+						<button className='admin_table_button'>стат.</button>
+					</Link>
+					<button
+						onClick={() => handleDelete(_id)}
+						className='admin_table_button'
+					>
+						удалить
 					</button>
-				</Link>
-				<Link to={`${_id}`}>
-					<button className="adminTableCardButton">статистика</button>
-				</Link>
-				<button
-					onClick={() => handleDelete(_id)}
-					className="adminTableCardButton"
-				>
-					удалить
-				</button>
+				</div>
 			</div>
-		</div>
+		</>
 	)
 }

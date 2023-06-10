@@ -23,20 +23,23 @@ export const CourseStatistics = () => {
 
 	return (
 		<>
-			{isLoading ? (
-				<h1>Загружаю...</h1>
-			) : (
-				<div className="courseCard">
-					<h1>{course?.title}</h1>
-					<hr />
-					<p>{course?.text}</p>
-					<hr />
-					<ul>
-						Выполнен пользователями:
-						{course.userCompleted.map(({ email, _id }) => (
-							<li key={_id}>{email}</li>
-						))}
-					</ul>
+			{isLoading ? null : (
+				<div className='container'>
+					<h1>Статистика курса "{course?.title}"</h1>
+					<div className='table'>
+						<div className='table_head'>
+							<p className='table_number head_item'>#</p>
+							<p className='table_title head_item'>Пользователь</p>
+						</div>
+						{course.userCompleted.map(({ email }, i) => {
+							return (
+								<div key={email + i} className='table_item'>
+									<p className='table_number'>{i + 1}.</p>
+									<p className='table_title'>{email}</p>
+								</div>
+							)
+						})}
+					</div>
 				</div>
 			)}
 		</>

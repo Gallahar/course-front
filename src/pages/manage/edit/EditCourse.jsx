@@ -19,6 +19,8 @@ export const EditCourse = () => {
 				const data = await axios.get(`course/${courseId}`)
 				setCurrentCourse(data.data)
 				setAddedTests(data.data.tests)
+				setTitle(data.data.title)
+				setText(data.data.text)
 			} catch (error) {
 				console.log(error)
 			} finally {
@@ -32,9 +34,7 @@ export const EditCourse = () => {
 		if (e.target.checked) {
 			setAddedTests((prev) => [...prev, test])
 		} else {
-			setAddedTests((prev) =>
-				prev.filter((item) => item._id !== test._id)
-			)
+			setAddedTests((prev) => prev.filter((item) => item._id !== test._id))
 		}
 	}
 
@@ -51,12 +51,11 @@ export const EditCourse = () => {
 					tests: addedTests,
 				},
 			}
-			await axios.post('course/update', { ...dto })
-			setCurrentCourse((prev) => ({ ...prev, title, text }))
+			const res = await axios.post('course/update', dto)
+			setCurrentCourse(res.data)
 			setCourses((prev) =>
-				prev.filter((course) => course._id !== courseId)
+				prev.map((course) => (course._id === courseId ? res.data : course))
 			)
-			setCourses((prev) => [...prev, currentCourse])
 			alert('Курс успешно обновлен')
 		} catch (error) {
 			alert(error.message)
@@ -65,45 +64,53 @@ export const EditCourse = () => {
 
 	return (
 		<>
-			{loading ? (
-				<h1>Загружаю...</h1>
-			) : (
-				<form onSubmit={handleUpdate} className="container-form">
+			{loading ? null : (
+				<form onSubmit={handleUpdate} className='container'>
 					{currentCourse?.title ? (
-						<h1>{`Обновить курс: "${currentCourse.title}"`}</h1>
+						<p className='admin_course_heading'>{`Обновить курс "${currentCourse.title}"`}</p>
 					) : null}
-					<input
-						onChange={(e) => setTitle(e.target.value)}
-						placeholder="обновить название"
-					/>
-					<textarea
-						onChange={(e) => setText(e.target.value)}
-						placeholder="обновить содержание"
-					/>
 					<div>
-						<h1>Добавить тесты:</h1>
+						<div className='admin_form_wrapper'>
+							<p className='admin_course_title'>Название курса</p>
+							<input
+								className='admin_input'
+								onChange={(e) => setTitle(e.target.value)}
+								value={title}
+							/>
+						</div>
+						<div className='admin_form_wrapper'>
+							<p className='admin_course_title'>Содержание курса</p>
+							<textarea
+								className='admin_area'
+								onChange={(e) => setText(e.target.value)}
+								rows={15}
+								value={text}
+							/>
+						</div>
+					</div>
+					<div className='admin_course_tests'>
+						<p className='admin_course_heading'>Добавить тесты к курсу</p>
 						{tests?.length ? (
-							<ul>
-								{tests.map((test) => (
-									<label key={test._id}>
-										{test.title}
-										<input
-											onChange={(e) =>
-												handleChangeTests(e, test)
-											}
-											type="checkbox"
-											defaultChecked={addedTests?.some(
-												(t) => {
+							<div className='admin_course_tests_wrapper'>
+								{tests.map((test) => {
+									if (!test.title) return
+									return (
+										<label className='course_test_wrapper' key={test._id}>
+											<p className='admin_course_test_title'>{test.title}</p>
+											<input
+												onChange={(e) => handleChangeTests(e, test)}
+												type='checkbox'
+												defaultChecked={addedTests?.some((t) => {
 													return t._id === test._id
-												}
-											)}
-										/>
-									</label>
-								))}
-							</ul>
+												})}
+											/>
+										</label>
+									)
+								})}
+							</div>
 						) : null}
 					</div>
-					<button>обновить</button>
+					<button className='admin_table_button'>обновить</button>
 				</form>
 			)}
 		</>
