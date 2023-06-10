@@ -10,6 +10,8 @@ export const Login = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
+	
+
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 
@@ -29,22 +31,30 @@ export const Login = () => {
 	}
 
 	return (
-		<section className="section">
+		<section className="auth_section">
 			<div className="container">
-				<form className="container-form" onSubmit={handleSubmit}>
-					<h1>Login</h1>
+				<form className="auth_form" onSubmit={handleSubmit}>
+					<h1 className="auth_heading">Вход</h1>
 					<input
+						className="auth_input"
 						onChange={(e) => setEmail(e.target.value)}
 						required
 						placeholder="enter your email"
 					/>
 					<input
+						type="password"
+						className="auth_input"
 						onChange={(e) => setPassword(e.target.value)}
 						required
 						placeholder="enter your password"
 					/>
-					<button type="submit">Login</button>
-					<Link to="/register"> Need an account?</Link>
+					<button className="auth_button" type="submit">
+						войти
+					</button>
+					<Link className="auth_link" to="/register">
+						{' '}
+						У вас нету аккаунта?
+					</Link>
 				</form>
 			</div>
 		</section>

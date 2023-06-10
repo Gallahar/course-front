@@ -37,22 +37,31 @@ export const UserCourse = () => {
 		<>
 			{isLoading ? null : (
 				<section>
-					<div className='container'>
-						<div className='course_wrapper'>
-							<p className='course_title'>Курс "{course.title}"</p>
-							<p className='course_text'>{course.text}</p>
+					<div className="container">
+						<div className="course_wrapper">
+							<p className="course_title">
+								Курс "{course.title}"
+							</p>
+							<p className="course_text">{course.text}</p>
 						</div>
-						<p className='course_tests_title'>Тесты по данному курсу</p>
-						<div className='table'>
-							<div className='table_head'>
-								<p className='table_number head_item'>#</p>
-								<p className='table_title head_item'>Название теста</p>
+						<p className="course_tests_title">
+							Тесты по данному курсу
+						</p>
+						<div className="table">
+							<div className="table_head">
+								<p className="table_number head_item">#</p>
+								<p className="table_title head_item">
+									Название теста
+								</p>
 							</div>
 							{course.tests.map(({ title, _id }, i) => {
 								return (
-									<div key={title} className='table_item'>
-										<p className='table_number'>{i + 1}.</p>
-										<Link to={`/tests/${_id}`} className='table_title'>
+									<div key={title} className="table_item">
+										<p className="table_number">{i + 1}.</p>
+										<Link
+											to={`/tests/${_id}`}
+											className="table_title"
+										>
 											{title}
 										</Link>
 									</div>
@@ -60,7 +69,15 @@ export const UserCourse = () => {
 							})}
 						</div>
 						{!isCompleted && (
-							<button onClick={completeHandler}>Я прошел курс</button>
+							<>
+								<br />
+								<button
+									className="admin_table_button"
+									onClick={completeHandler}
+								>
+									Я прошел курс
+								</button>
+							</>
 						)}
 					</div>
 				</section>

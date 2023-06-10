@@ -29,22 +29,29 @@ export const Register = () => {
 	}
 
 	return (
-		<section className="section">
+		<section className="auth_section">
 			<div className="container">
-				<form className="container-form" onSubmit={handleSubmit}>
-					<h1>Register</h1>
+				<form className="auth_form" onSubmit={handleSubmit}>
+					<h1 className="auth_heading">Регистрация</h1>
 					<input
+						className="auth_input"
 						onChange={(e) => setEmail(e.target.value)}
 						required
 						placeholder="enter your email"
 					/>
 					<input
+						className="auth_input"
 						onChange={(e) => setPassword(e.target.value)}
 						required
 						placeholder="enter your password"
 					/>
-					<button type="submit">register</button>
-					<Link to="/login"> Already have an account?</Link>
+					<button className="auth_button" type="submit">
+						зарегистрироваться
+					</button>
+					<Link className="auth_link" to="/login">
+						{' '}
+						У вас уже есть аккаунт?
+					</Link>
 				</form>
 			</div>
 		</section>

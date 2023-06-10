@@ -42,7 +42,9 @@ export const EditTest = () => {
 			if (answers.length < 2) return alert('Введите минимум 2 ответа')
 			if (!question) return alert('Введите название вопроса')
 			if (!answers.includes(correctAnswer))
-				return alert('Правильный ответ должен совпадать с одним из ответов')
+				return alert(
+					'Правильный ответ должен совпадать с одним из ответов'
+				)
 			for (let i = 0; i < answers.length; i++) {
 				if (!answers[i]) return alert('Ответ не может быть пустым')
 			}
@@ -58,7 +60,9 @@ export const EditTest = () => {
 			const res = await axios.post('test/update', dto)
 			setCurrentTest(res.data)
 			setTests((prev) =>
-				prev.map((test) => (test._id === currentTest._id ? res.data : test))
+				prev.map((test) =>
+					test._id === currentTest._id ? res.data : test
+				)
 			)
 			alert('Тест успешно обновлен')
 		} catch (e) {
@@ -106,19 +110,25 @@ export const EditTest = () => {
 	return (
 		<>
 			{loading ? null : (
-				<div className='container'>
+				<div className="container">
 					{currentTest?.title ? (
 						<h1>{`Обновить тест: "${currentTest.title}"`}</h1>
 					) : null}
-					<div className='admin_form_wrapper' style={{ marginBottom: '10px' }}>
-						<p className='admin_course_title'>Название курса</p>
+					<div
+						className="admin_form_wrapper"
+						style={{ marginBottom: '10px' }}
+					>
+						<p className="admin_course_title">Название теста</p>
 						<input
-							className='admin_input'
+							className="admin_input"
 							onChange={(e) => setTitle(e.target.value)}
 							value={title}
 						/>
 					</div>
-					<button onClick={addQuestionHandler} className='admin_table_button'>
+					<button
+						onClick={addQuestionHandler}
+						className="admin_table_button"
+					>
 						Добавить вопрос
 					</button>
 					<div>
@@ -126,7 +136,9 @@ export const EditTest = () => {
 							<TestQuestion
 								q={question}
 								key={question.question + i}
-								deleteQuestionHandler={() => deleteQuestionHandler(i)}
+								deleteQuestionHandler={() =>
+									deleteQuestionHandler(i)
+								}
 								index={i}
 								saveQuestionHandler={saveQuestionHandler}
 							/>
@@ -134,7 +146,7 @@ export const EditTest = () => {
 					</div>
 					<button
 						style={{ marginTop: '30px' }}
-						className='admin_table_button'
+						className="admin_table_button"
 						onClick={handleUpdate}
 					>
 						Обновить тест

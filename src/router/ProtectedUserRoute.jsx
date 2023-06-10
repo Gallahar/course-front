@@ -10,10 +10,10 @@ export const ProtectedUserRoute = ({ children }) => {
 		if (!user && !isLoading) {
 			navigate('/login', { replace: true })
 		}
-	}, [user, isLoading])
+	}, [user, isLoading, navigate])
 
 	if (isLoading) {
-		return <></>
+		return <h1>Загружаю...</h1>
 	}
 
 	return <div>{children}</div>
