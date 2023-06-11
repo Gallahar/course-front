@@ -3,8 +3,12 @@ import { axios } from 'api/axios'
 import { MainContext } from 'providers/MainProvider'
 import { useIdLocation } from 'hooks/useIdLocation'
 import { Link } from 'react-router-dom'
+import Cookies from 'js-cookie'
+
 
 export const UserCourse = () => {
+
+	const token = Cookies.get('token')
 	const { user } = useContext(MainContext)
 	const [isCompleted, setIsCompleted] = useState(false)
 	const courseId = useIdLocation()
@@ -28,9 +32,17 @@ export const UserCourse = () => {
 
 	const completeHandler = async () => {
 		setIsCompleted(true)
-		await axios.post('course/complete', {
-			_id: course._id,
-		})
+		await axios.post(
+			'course/complete',
+			{
+				_id: course._id,
+			},
+			{
+				headers: {
+					token: token ? JSON.parse(token) : null,
+				},
+			}
+		)
 	}
 
 	return (
@@ -85,3 +97,4 @@ export const UserCourse = () => {
 		</>
 	)
 }
+

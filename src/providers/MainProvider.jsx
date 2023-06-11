@@ -1,5 +1,6 @@
 import { axios } from 'api/axios'
 import { createContext, useState, useEffect } from 'react'
+import Cookies from 'js-cookie'
 
 const MainContextInitialValue = {
 	user: {},
@@ -15,9 +16,15 @@ export const MainProvider = ({ children }) => {
 	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
+		const token = Cookies.get('token')
+
 		const refreshUser = async () => {
 			try {
-				const data = await axios.get('auth/refresh')
+				const data = await axios.get('auth/refresh', {
+					headers: {
+						token: token ? JSON.parse(token) : null,
+					},
+				})
 				setUser(data.data)
 			} catch (error) {
 				console.log(error)

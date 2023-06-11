@@ -37,11 +37,6 @@ export const Profile = () => {
 					Пользователь - {email}{' '}
 					<span>( {isAdmin ? 'админ' : 'студент'} )</span>
 				</p>
-				{isAdmin && (
-					<Link className="admin_table_button" to="/manage">
-						Админ панель
-					</Link>
-				)}
 			</div>
 			<p className="profile_heading">Пройденные курсы</p>
 			<div className="table">

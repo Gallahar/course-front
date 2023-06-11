@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from 'react'
 import { axios } from 'api/axios.js'
 import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 const AdminContextInitialValue = {
 	courses: [],
@@ -18,9 +19,15 @@ export const AdminProvider = ({ children }) => {
 	const [tests, setTests] = useState([])
 
 	useEffect(() => {
+		const token = Cookies.get('token')
+
 		const getCourses = async () => {
 			try {
-				const data = await axios.get('/course/find-admin')
+				const data = await axios.get('/course/find-admin', {
+					headers: {
+						token: token ? JSON.parse(token) : null,
+					},
+				})
 				setCourses(data.data)
 			} catch (error) {
 				if (error.response.status === 403) {
@@ -37,7 +44,11 @@ export const AdminProvider = ({ children }) => {
 
 		const getTests = async () => {
 			try {
-				const data = await axios.get('/test/find-admin')
+				const data = await axios.get('/test/find-admin', {
+					headers: {
+						token: token ? JSON.parse(token) : null,
+					},
+				})
 				setTests(data.data)
 			} catch (error) {
 				if (error.response.status === 403) {
