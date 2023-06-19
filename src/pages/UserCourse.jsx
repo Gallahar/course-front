@@ -17,9 +17,9 @@ export const UserCourse = () => {
 	useEffect(() => {
 		const getCourseById = async () => {
 			try {
-				const data = await axios.get(`/course/${courseId}`)
+				const data = await axios.get(`/course/${courseId}`)                   //при инициализации компонента(страницы) делаем запрос на сервер и получаем курс по идентификатору.
 				setCourse(data.data)
-				setIsCompleted(data.data.userCompleted.includes(user._id))
+				setIsCompleted(data.data.userCompleted.includes(user._id))  // если курс уже был завершен - меняем состояние .
 			} catch (error) {
 				console.log(error)
 			} finally {
@@ -29,8 +29,8 @@ export const UserCourse = () => {
 
 		getCourseById()
 	}, [])
-
-	const completeHandler = async () => {
+ 
+	const completeHandler = async () => {           // запрос на сервер , передаем идентификатор курса и помечаем его выполненным для текущего пользователя.
 		setIsCompleted(true)
 		await axios.post(
 			'course/complete',

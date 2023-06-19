@@ -7,7 +7,7 @@ export const UserHeader = () => {
 	const { user, setUser } = useContext(MainContext)
 	const [isBurgerActive, setBurgerActive] = useState(false)
 
-	const logoutHandler = () => {
+	const logoutHandler = () => {                   // функция  выхода из аккаунта, обнуляем данные пользователя и удаляем его токен авторизации.
 		Cookies.remove('token')
 		setUser(null)
 	}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { axios } from 'api/axios'
 import Cookies from 'js-cookie'
 import { useIdLocation } from 'hooks/useIdLocation'
@@ -15,7 +15,7 @@ export const UserTest = () => {
 	useEffect(() => {
 		const getTestById = async () => {
 			try {
-				const data = await axios.get(`/test/${testId}`)
+				const data = await axios.get(`/test/${testId}`)   // делаем запрос на сервер и получаем данные курса по его идентификатору.
 				setTest(data.data)
 			} catch (error) {
 				console.log(error)
@@ -27,20 +27,25 @@ export const UserTest = () => {
 		getTestById()
 	}, [])
 
-	const answerHandler = async (value) => {
+	const answerHandler = async (value) => {          // функция ответа на вопрос в тесте, передаем в нее значение которое выбрал пользователь, если оно совпадает с правильным ответом - увеличиваем количество правильных ответов на 1.
 		const token = Cookies.get('token')
 
 		const currentQuestion = test.questions[questionNumber]
-		if (currentQuestion.correctAnswer === value) {
+
+		const isAnswerCorrect = currentQuestion.correctAnswer === value
+
+		if (isAnswerCorrect) {
 			setCorrectAnswers((prev) => prev + 1)
 		}
-		if (questionNumber === test.questions.length - 1) {
+		if (questionNumber === test.questions.length - 1) {      // если индекс текущего вопроса равняется индексу последнего элемента в массиве вопросов завершаем тест, и отправляем статистику с ответами на сервер.
 			setAction('finish')
 			await axios.post(
 				'test/complete',
 				{
 					_id: test._id,
-					result: `${correctAnswers} / ${test.questions.length}`,
+					result: `${
+						isAnswerCorrect ? correctAnswers + 1 : correctAnswers
+					} / ${test.questions.length}`,
 				},
 				{
 					headers: {
@@ -50,7 +55,7 @@ export const UserTest = () => {
 			)
 			return
 		}
-		setQuestionNumber((prev) => prev + 1)
+		setQuestionNumber((prev) => prev + 1)        // если ни одно условие не совпало увеличиваем индекс текущего вопроса на 1.
 	}
 
 	return (

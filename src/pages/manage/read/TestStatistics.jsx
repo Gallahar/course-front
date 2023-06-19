@@ -11,7 +11,7 @@ export const TestStatistics = () => {
 	useEffect(() => {
 		const getTestById = async () => {
 			try {
-				const data = await axios.get(`/test/statistics/${id}`)
+				const data = await axios.get(`/test/statistics/${id}`) // при инициализации компонента делаем запрос на сервер - получение статистики теста по идентификатору  который берем из адреса страницы.
 				setTest(data.data)
 				setIsLoading(false)
 			} catch (error) {
@@ -33,7 +33,7 @@ export const TestStatistics = () => {
 							<p className='table_number head_item'>#</p>
 							<p className='table_title head_item'>Пользователь</p>
 							<p className='table_quantity head_item'>Результат</p>
-							<p className='table_quantity head_item'>Дата</p>
+							<p className='table_quantity head_item'>Дата</p>           
 						</div>
 						{test.results.map(({ user, result, date: notFormatedDate }, i) => {
 							const date = dayjs(notFormatedDate).format('MMM, ddd - HH:mm')

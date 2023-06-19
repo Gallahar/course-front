@@ -7,6 +7,7 @@ export const ProtectedUserRoute = ({ children }) => {
 	const navigate = useNavigate()
 
 	useEffect(() => {
+		// проверяем  - авторизовался ли пользователь, если загрузка уже завершилась и пользователь не авторизован  - перенаправляем его на страницу аутентификации .
 		if (!user && !isLoading) {
 			navigate('/login', { replace: true })
 		}

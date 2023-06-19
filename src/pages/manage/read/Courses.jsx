@@ -8,7 +8,7 @@ export const Courses = () => {
 
 	const createCourse = async () => {
 		try {
-			const data = await axios.post('course/create')
+			const data = await axios.post('course/create')         // функция создания нового курса. получаем данные, копируем предыдущее состояние и добавляем новые данные полученные с сервера.
 			setCourses((prev) => [...prev, data.data])
 		} catch (error) {
 			if (error.response.status === 400) {
@@ -20,7 +20,7 @@ export const Courses = () => {
 	const deleteCourse = async (id) => {
 		try {
 			await axios.delete(`course/${id}`)
-			setCourses((prev) => prev.filter((course) => course._id !== id))
+			setCourses((prev) => prev.filter((course) => course._id !== id))             // функция удаления курса по его идентификатору
 			alert('Курс успешно удален')
 		} catch (error) {
 			alert(error.message)

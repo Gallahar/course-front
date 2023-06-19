@@ -9,26 +9,25 @@ export const Profile = () => {
 	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
-		const token = Cookies.get('token')
-
-		const fetchTests = async () => {
+		const token = Cookies.get('token') // при инициализации(маунте) компонента далаем запрос на сервер  для получения данных пользователя.
+		const fetchProfile = async () => {
 			try {
 				const data = await axios.get('auth/profile', {
 					headers: {
 						token: token ? JSON.parse(token) : null,
 					},
 				})
-				setProfile(data.data)
+				setProfile(data.data) //в случае успеха передаем данные с ответа в состояние пользователя.
 			} catch (e) {
-				console.log(e)
+				console.log(e) // отлавливаем ошибку.
 			} finally {
-				setIsLoading(false)
+				setIsLoading(false) // в конце в любом случае меняем состоянии загрузки(на статус завершенной)
 			}
 		}
-		fetchTests()
+		fetchProfile()
 	}, [])
 
-	const { coursesCompleted, testsCompleted, isAdmin, email } = profile
+	const { coursesCompleted, testsCompleted, isAdmin, email } = profile // деструктуризация профиля пользователя, получаем выполненные тесты, курсы статистику по ним, проверяем роль пользователя, если роль - админ так же отрисовываем ссылку на админ панель в навигации.
 
 	return isLoading ? null : (
 		<div className="container">

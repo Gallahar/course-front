@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { TestAnswer } from './TestAnswer'
 
-export const TestQuestion = ({
+export const TestQuestion = ({ // прокидываем в компонент функции для обработчиков событий :  удаление вопроса, сохранение вопроса. 
 	q,
 	deleteQuestionHandler,
 	saveQuestionHandler,
 	index,
 }) => {
 	const {
-		question: questionData,
+		question: questionData, // деструктурируем прокинутые данные - вопрос, массив ответов и правильный ответ.
 		_id,
 		answers: answersData,
 		correctAnswer: correctAnswerData,
@@ -19,10 +19,11 @@ export const TestQuestion = ({
 	const [correctAnswer, setCorrectAnswer] = useState(correctAnswerData)
 
 	const addAnswer = () => {
-		setAnswers((prev) => [...prev, ''])
+		setAnswers((prev) => [...prev, '']) // функция добавления нового ответа, копируем  массив ответов и добавляем у нему "пустой ответ " который затем можно будет изменить.
 	}
 
 	const saveAnswerHandler = (answer, index) => {
+		// функция сохранения ответа, принимает в себя индекс ответа который мы хотим сохранить и его новое значение, если индекс совпадает со значением переменной в цикле - добавляем в массив новое значение, в противном случае добавляем старое.
 		const updatedAnswers = []
 		for (let i = 0; i < answers.length; i++) {
 			if (i !== index) {
@@ -36,6 +37,7 @@ export const TestQuestion = ({
 	}
 
 	const deleteAnswerHandler = (index) => {
+		// функция удаления ответа -  передаем в нее индекс ответа, если он совпадает с переменной в цикле, мы его пропускаем, а остальные добавляем в массив.
 		const updatedAnswers = []
 		for (let i = 0; i < answers.length; i++) {
 			if (i !== index) {
@@ -46,18 +48,18 @@ export const TestQuestion = ({
 	}
 
 	return (
-		<div className='admin_form_wrapper'>
-			<div className='admin_test_wrapper'>
-				<p className='admin_course_title'>Вопрос</p>
+		<div className="admin_form_wrapper">
+			<div className="admin_test_wrapper">
+				<p className="admin_course_title">Вопрос</p>
 				<input
-					className='admin_input'
+					className="admin_input"
 					onChange={(e) => setQuestion(e.target.value)}
 					value={question}
 				/>
 			</div>
 			<button
 				style={{ marginTop: '10px' }}
-				className='admin_table_button'
+				className="admin_table_button"
 				onClick={addAnswer}
 			>
 				Добавить ответ
@@ -72,24 +74,32 @@ export const TestQuestion = ({
 				/>
 			))}
 			<div style={{ marginTop: '20px' }}>
-				<p className='admin_course_title'>Правильный ответ</p>
+				<p className="admin_course_title">Правильный ответ</p>
 				<input
-					className='admin_input'
+					className="admin_input"
 					onChange={(e) => setCorrectAnswer(e.target.value)}
 					value={correctAnswer}
 				/>
 			</div>
 			<div style={{ marginTop: '20px' }}>
 				<button
-					className='admin_table_button'
+					className="admin_table_button"
 					style={{ marginRight: '10px' }}
 					onClick={() =>
-						saveQuestionHandler(answers, correctAnswer, question, index)
+						saveQuestionHandler(
+							answers,
+							correctAnswer,
+							question,
+							index
+						)
 					}
 				>
 					Сохранить вопрос
 				</button>
-				<button className='admin_table_button' onClick={deleteQuestionHandler}>
+				<button
+					className="admin_table_button"
+					onClick={deleteQuestionHandler}
+				>
 					Удалить вопрос
 				</button>
 			</div>

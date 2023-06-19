@@ -8,7 +8,8 @@ export const ProtectedAdminRoute = ({ children }) => {
 
 	useEffect(() => {
 		if (!user?.isAdmin && !isLoading) {
-			navigate('/login', { replace: true })
+			// проверяем является ли пользователь админом, если загрузка уже завершилась и пользователь не администратор - перенаправляем его на главную страницу
+			navigate('/', { replace: true })
 		}
 	}, [isLoading])
 

@@ -10,7 +10,7 @@ export const CourseStatistics = () => {
 	useEffect(() => {
 		const getCourseById = async () => {
 			try {
-				const data = await axios.get(`/course/statistics/${id}`)
+				const data = await axios.get(`/course/statistics/${id}`)             // при инициализации компонента делаем запрос на сервер - получение статистики курса по идентификатору  который берем из адреса страницы.
 				setCourse(data.data)
 				setIsLoading(false)
 			} catch (error) {

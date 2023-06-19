@@ -18,12 +18,12 @@ import { UserTests } from 'pages/UserTests'
 import { UserCourses } from 'pages/UserCourses'
 import { Profile } from 'pages/Profile'
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter([                 // создание роутера для маршрутизации нашего приложения .
 	{ element: <Login />, path: '/login' },
-	{ element: <Register />, path: '/register' },
+	{ element: <Register />, path: '/register' },  // указываем наш "путь" и элемент который будет отображаться по "данному адресу страницы"
 	{
-		element: (
-			<ProtectedAdminRoute>
+		element: (   // оборачиваем лейаут админа в вспомогательный компонент, который будет проверять является ли пользователь админом или нет,  и в зависимости от этого рендерить страницы или же перенаправлять юзера на стартовую страницу/ страницу логина.
+			<ProtectedAdminRoute>     
 				<AdminLayout />
 			</ProtectedAdminRoute>
 		),
@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
 				element: <Courses />,
 				path: 'courses',
 			},
-			{ element: <CourseStatistics />, path: 'courses/:id' },
+			{ element: <CourseStatistics />, path: 'courses/:id' },  // динамический роут, то что идет после :  - может быть чем угодно, в нашем случае мы передаем туда айди курса , ниже похожая логика.
 			{ element: <EditCourse />, path: 'courses/edit/:id' },
 			{
 				element: <Tests />,

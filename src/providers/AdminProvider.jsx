@@ -24,6 +24,7 @@ export const AdminProvider = ({ children }) => {
 		const getCourses = async () => {
 			try {
 				const data = await axios.get('/course/find-admin', {
+					// получем курсы для администратора
 					headers: {
 						token: token ? JSON.parse(token) : null,
 					},
@@ -31,9 +32,9 @@ export const AdminProvider = ({ children }) => {
 				setCourses(data.data)
 			} catch (error) {
 				if (error.response.status === 403) {
-					nav('/', { replace: true })
+					nav('/', { replace: true }) // если ошибка со статусом 403 (forbidden, запрещено) - перенаправляем на главную, значит пользователь не администратор.
 				} else if (error.response.status === 401) {
-					nav('/login', { replace: true })
+					nav('/login', { replace: true }) // если ошибка со статусом 401(unauthorized) - перенаправляем на страницу аутентификации
 				} else {
 					alert(error.message)
 				}
@@ -45,7 +46,7 @@ export const AdminProvider = ({ children }) => {
 		const getTests = async () => {
 			try {
 				const data = await axios.get('/test/find-admin', {
-					headers: {
+					headers: {         // та же логика что и для курсов, только делаем запрос на сервер чтобы получить тесты.
 						token: token ? JSON.parse(token) : null,
 					},
 				})
@@ -68,7 +69,7 @@ export const AdminProvider = ({ children }) => {
 	}, [])
 
 	return (
-		<AdminContext.Provider
+		<AdminContext.Provider       // передаем пропсы дочерним компонентам чтобы они могли получить к ним доступ через хук useContext а т.е. : функции для изменения состояния курсов и тестов, массивы : курсов и тестов, а  так же индикатор загрузки.
 			value={{
 				courses,
 				tests,

@@ -4,7 +4,7 @@ import { RouterProvider } from 'react-router-dom'
 import { MainProvider } from 'providers/MainProvider'
 import { router } from 'router/index.jsx'
 
-import 'assets/styles/global.css'
+import 'assets/styles/global.css'             // инициализация всего приложения, оборачиваем его в главный контекст и подключаем наш router.
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

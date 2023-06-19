@@ -9,7 +9,7 @@ export const UserTests = () => {
 	useEffect(() => {
 		const fetchTests = async () => {
 			try {
-				const data = await axios.get('test/find')
+				const data = await axios.get('test/find') // делаем запрос на сервер и получаем массив всех тестов.
 				setTests(data.data)
 			} catch (e) {
 				console.log(e)

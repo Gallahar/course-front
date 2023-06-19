@@ -1,17 +1,17 @@
 import { useState } from 'react'
 
-export const TestAnswer = ({
+export const TestAnswer = ({  // прокидываем в  компонент  функции для обработчиков событий: удаление ответа, сохранение ответа /  индекс ответа, и его предыдущее состояние .
 	answerData,
 	deleteAnswerHandler,
 	saveAnswerHandler,
 	index,
 }) => {
-	const [answer, setAnswer] = useState(answerData)
+	const [answer, setAnswer] = useState(answerData)  
 
 	return (
 		<div className='admin_test_answer_wrapper'>
 			<div>
-				<p className='admin_course_title'>{index + 1}) Ответ</p>
+				<p className='admin_course_title'>{index + 1} Ответ</p>
 				<input
 					className='admin_input'
 					onChange={(e) => setAnswer(e.target.value)}

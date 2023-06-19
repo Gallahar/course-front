@@ -7,7 +7,7 @@ import { useState } from 'react'
 export const EditCourse = () => {
 	const [loading, setLoading] = useState(true)
 	const [currentCourse, setCurrentCourse] = useState({})
-	const { setCourses, tests } = useContext(AdminContext)
+	const { setCourses, tests } = useContext(AdminContext)                                 // берем состояние тестов из глобального контекста
 	const courseId = useIdLocation()
 	const [title, setTitle] = useState('')
 	const [text, setText] = useState('')
@@ -16,10 +16,10 @@ export const EditCourse = () => {
 	useEffect(() => {
 		const getCurrentCourse = async () => {
 			try {
-				const data = await axios.get(`course/${courseId}`)
+				const data = await axios.get(`course/${courseId}`)                                // получение курса: делаем запрос на сервер и указываем  идентификатор курса, который получаем из адреса страницы.
 				setCurrentCourse(data.data)
 				setAddedTests(data.data.tests)
-				setTitle(data.data.title)
+				setTitle(data.data.title)                            // при успехе устанавливаем новое состояние курса и добавленных в него тестов.
 				setText(data.data.text)
 			} catch (error) {
 				console.log(error)
@@ -32,7 +32,7 @@ export const EditCourse = () => {
 
 	const handleChangeTests = (e, test) => {
 		if (e.target.checked) {
-			setAddedTests((prev) => [...prev, test])
+			setAddedTests((prev) => [...prev, test])                                                 // добавление тестов в курсу, в случае если чекбокс стоит  - фильтруем массив добавленных тестов, если же нет - добавляем выбранный тест к курсу. 
 		} else {
 			setAddedTests((prev) => prev.filter((item) => item._id !== test._id))
 		}
@@ -41,24 +41,24 @@ export const EditCourse = () => {
 	const handleUpdate = async (e) => {
 		e.preventDefault()
 		if (!text.trim() || !title.trim())
-			return alert('Поля не могут быть пустыми')
+			return alert('Поля не могут быть пустыми')                               // Валидируем поля , чтобы небыли пустыми.
 		try {
 			const dto = {
 				_id: courseId,
 				dto: {
 					title,
-					text,
+					text,                                                                              
 					tests: addedTests,
 				},
 			}
-			const res = await axios.post('course/update', dto)
+			const res = await axios.post('course/update', dto)             // Отправляем запрос на сервер с новыми данными курса и добавленными тестами, в случае успеха меняем состояние на новое.
 			setCurrentCourse(res.data)
 			setCourses((prev) =>
 				prev.map((course) => (course._id === courseId ? res.data : course))
 			)
-			alert('Курс успешно обновлен')
+			alert('Курс успешно обновлен')                                           
 		} catch (error) {
-			alert(error.message)
+			alert(error.message)              // не забываем отловить ошибку.
 		}
 	}
 

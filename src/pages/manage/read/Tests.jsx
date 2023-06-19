@@ -8,8 +8,8 @@ export const Tests = () => {
 
 	const createTest = async () => {
 		try {
-			const data = await axios.post('test/create')
-			setTests((prev) => [...prev, data.data])
+			const data = await axios.post('test/create')            // делаем запрос на сервер и создаем новый тест, в случае успеха копируем предыдущие данные и добавляем новый тест.
+			setTests((prev) => [...prev, data.data])						
 		} catch (error) {
 			if (error.response.status === 400) {
 				alert('Пустой документ уже существует')
@@ -20,7 +20,7 @@ export const Tests = () => {
 	const deleteTest = async (id) => {
 		try {
 			await axios.delete(`test/${id}`)
-			setTests((prev) => prev.filter((test) => test._id !== id))
+			setTests((prev) => prev.filter((test) => test._id !== id))       // функция удаления теста по его идентификатору, который мы передаем в функцию. фильтруем массив от того теста чей идентификатор мы передали в функцию.
 			alert('Тест успешно удален')
 		} catch (error) {
 			alert(error.message)

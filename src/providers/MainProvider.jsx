@@ -20,7 +20,7 @@ export const MainProvider = ({ children }) => {
 
 		const refreshUser = async () => {
 			try {
-				const data = await axios.get('auth/refresh', {
+				const data = await axios.get('auth/refresh', {               // при обновлении страницы делаем запрос на сервер, и прикрепляем к нему токен авторизации, при успехе получаем данные пользователя.
 					headers: {
 						token: token ? JSON.parse(token) : null,
 					},
@@ -39,7 +39,7 @@ export const MainProvider = ({ children }) => {
 	useEffect(() => {
 		const getCourses = async () => {
 			try {
-				const data = await axios.get('course/find')
+				const data = await axios.get('course/find')             // получаем все курсы для пользователя с сервера.
 				setCourses(data.data)
 			} catch (error) {
 				console.log(error)
@@ -48,7 +48,7 @@ export const MainProvider = ({ children }) => {
 
 		const getTests = async () => {
 			try {
-				const data = await axios.get('test/find')
+				const data = await axios.get('test/find') // получаем все тесты для пользователя с сервера.
 				setTests(data.data)
 			} catch (error) {
 				console.log(error)
@@ -62,7 +62,7 @@ export const MainProvider = ({ children }) => {
 		<MainContext.Provider
 			value={{
 				user,
-				setUser,
+				setUser,            // прокидываем пропсы(свойства/данные) ниже , чтобы все дочерние компоненты могли ими пользоваться, а т.е. : данные пользователя, функция для изменения данных пользователя , массив тестов и курсов, а так же индикатор загрузки.
 				isLoading,
 				courses,
 				tests,

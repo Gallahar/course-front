@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
-export const AdminTableCard = ({ item, handleDelete }) => {
-	const { _id, title } = item
+export const AdminTableCard = ({ item, handleDelete }) => {  // деструктурируем пропсы, вытаскиваем  функцию удаления  и сам элемент.
+	const { _id, title } = item // деструктурируем его и получаем его титл и айди, который затем будем передавать в функцию удаления.
 
 	return (
 		<>

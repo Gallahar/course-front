@@ -16,29 +16,26 @@ export const EditTest = () => {
 	useEffect(() => {
 		const getCurrentTest = async () => {
 			try {
-				const data = await axios.get(`test/${testId}`)
+				const data = await axios.get(`test/${testId}`)                      // при загрузке компонента делаем запрос на сервер, используя идентификатор страницы и получаем тест, передаем в функцию данные которые нам пришли с сервера.
 				setCurrentTest(data.data)
 				setTitle(data.data.title)
 				setQuestions(data.data.questions)
 			} catch (error) {
 				console.log(error)
 			} finally {
-				setLoading(false)
+				setLoading(false)                  // не забываем отловить ошибку и отметить что загрузка была завершена.
 			}
 		}
 		getCurrentTest()
 	}, [])
 
-	useEffect(() => {
-		console.log(currentTest)
-	}, [currentTest])
 
 	const handleUpdate = async () => {
 		if (!title) return alert('Название теста обязательно')
 		if (questions.length === 0)
-			return alert('Необходимо добавить хотя бы 1 вопрос')
+			return alert('Необходимо добавить хотя бы 1 вопрос')            // функция для отправки новых данных по тесту
 		for (let i = 0; i < questions.length; i++) {
-			const { answers, question, correctAnswer } = questions[i]
+			const { answers, question, correctAnswer } = questions[i]                   // проходимся по массиву вопросов,проверяем чтобы хотя бы один ответ совпадал с правильным.
 			if (answers.length < 2) return alert('Введите минимум 2 ответа')
 			if (!question) return alert('Введите название вопроса')
 			if (!answers.includes(correctAnswer))
@@ -46,7 +43,7 @@ export const EditTest = () => {
 					'Правильный ответ должен совпадать с одним из ответов'
 				)
 			for (let i = 0; i < answers.length; i++) {
-				if (!answers[i]) return alert('Ответ не может быть пустым')
+				if (!answers[i]) return alert('Ответ не может быть пустым')            // проверяем чтобы ни один ответ не был пустым.
 			}
 		}
 		try {
@@ -57,7 +54,7 @@ export const EditTest = () => {
 					questions,
 				},
 			}
-			const res = await axios.post('test/update', dto)
+			const res = await axios.post('test/update', dto)                  // делаем запрос на сервер если валидация успешна, берем данные с ответа и меняем состояние теста, а так же все состояние тестов в глобальном контексте.
 			setCurrentTest(res.data)
 			setTests((prev) =>
 				prev.map((test) =>
@@ -73,17 +70,17 @@ export const EditTest = () => {
 	const addQuestionHandler = () => {
 		setQuestions((prev) => [
 			...prev,
-			{ answers: [], correctAnswer: '', question: '' },
+			{ answers: [], correctAnswer: '', question: '' },                 // создание вопроса, копируем предыдущее состояние, и добавляем новый вопрос.
 		])
 	}
 
-	const saveQuestionHandler = (answers, correctAnswer, question, index) => {
+	const saveQuestionHandler = (answers, correctAnswer, question, index) => {               // функция сохранения  каждого вопроса, передаем в нее массив ответов, правильный ответ , сам вопрос и его индекс.
 		if (answers.length < 2) return alert('Введите минимум 2 ответа')
 		if (!question) return alert('Введите название вопроса')
 		if (!answers.includes(correctAnswer))
-			return alert('Правильный ответ должен совпадать с одним из ответов')
+			return alert('Правильный ответ должен совпадать с одним из ответов')         
 		for (let i = 0; i < answers.length; i++) {
-			if (!answers[i]) return alert('Ответ не может быть пустым')
+			if (!answers[i]) return alert('Ответ не может быть пустым')          
 		}
 		const updatedQuestions = []
 		for (let i = 0; i < questions.length; i++) {
@@ -93,15 +90,15 @@ export const EditTest = () => {
 				updatedQuestions.push({ answers, correctAnswer, question })
 			}
 		}
-		setQuestions(updatedQuestions)
+		setQuestions(updatedQuestions)              // при успешной валидации сохраняем состояние вопросов.
 		alert('Вопрос сохранен!')
 	}
 
 	const deleteQuestionHandler = (index) => {
-		const updatedQuestions = []
+		const updatedQuestions = []                             // функция удаления вопроса по его индексу.
 		for (let i = 0; i < questions.length; i++) {
 			if (i !== index) {
-				updatedQuestions.push(questions[i])
+				updatedQuestions.push(questions[i])       // если индекс не совпадает с переменной в цикле оставляем вопрос в массиве.
 			}
 		}
 		setQuestions(updatedQuestions)

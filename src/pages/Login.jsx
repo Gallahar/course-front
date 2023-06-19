@@ -5,27 +5,27 @@ import Cookies from 'js-cookie'
 import { MainContext } from 'providers/MainProvider'
 
 export const Login = () => {
-	const { setUser } = useContext(MainContext)
+	const { setUser } = useContext(MainContext)               
 	const navigate = useNavigate()
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
 	
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = async (e) => {                     // функция для отправки данных на сервер
 		e.preventDefault()
 
 		if (!email.trim() || !password.trim())
-			return alert('fields must not be empty')
+			return alert('fields must not be empty')   // валидируем форму, проверяем на то чтобы поля не были пустыми.
 		try {
 			const data = await axios.post('auth/login', {
 				email,
 				password,
-			})
+			})                        //дожидаемся ответа , в случае успеха сетим токен и данные юзера,перенаправляем его на главную страницу приложения
 			Cookies.set('token', JSON.stringify(data.data.token))
 			setUser(data.data.user)
 			navigate('/')
-		} catch (error) {
+		} catch (error) {                    // отлавливаем ошибку если что-то пошло не так.
 			alert(error.message)
 		}
 	}

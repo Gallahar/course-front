@@ -9,7 +9,7 @@ export const UserCourses = () => {
 	useEffect(() => {
 		const fetchCourses = async () => {
 			try {
-				const data = await axios.get('course/find')
+				const data = await axios.get('course/find')               // делаем запрос на сервер и получаем массив всех курсов.
 				setCourses(data.data)
 			} catch (e) {
 				console.log(e)
